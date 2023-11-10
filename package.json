@@ -1,0 +1,14 @@
+{
+  "name": "real-time-chat",
+  "version": "1.0.0",
+  "description": "a real time chat application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sahan Rajapaksha",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

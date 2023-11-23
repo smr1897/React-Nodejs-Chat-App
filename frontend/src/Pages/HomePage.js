@@ -1,12 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
-import { Container , Box , Text , Flex ,Stack , Tab , TabList , Tabs } from '@chakra-ui/react'
+import { Container , Box , Text , Flex ,Stack , Tab , TabList , Tabs ,TabPanel, TabPanels} from '@chakra-ui/react'
 //import { HomeLayout } from '../Components/Layouts/HomeLayout'
-import { Button, ButtonGroup , InputGroup , Input , InputLeftElement , InputRightElement} from '@chakra-ui/react'
+import { Button, ButtonGroup , Checkbox , Link , InputGroup , Input , InputLeftElement , InputRightElement} from '@chakra-ui/react'
 import { FaUserTie } from 'react-icons/fa'
-import { FaUserPlus , FaPhone , FaEnvelope} from 'react-icons/fa'
+import { FaUserPlus , FaPhone , FaEnvelope , FaEyeSlash , FaEye} from 'react-icons/fa'
 
-function PasswordInput() {
+function PasswordInput({placeholder}) {
   const [show, setShow] = React.useState(false)
   const handleClick = () => setShow(!show)
 
@@ -15,14 +15,38 @@ function PasswordInput() {
       <Input
         pr='4.5rem'
         type={show ? 'text' : 'password'}
-        placeholder='Enter password'
+        placeholder={placeholder}
       />
       <InputRightElement width='4.5rem'>
         <Button h='1.75rem' size='sm' onClick={handleClick}>
-          {show ? 'Hide' : 'Show'}
+          {show ? <FaEye/> : <FaEyeSlash/>}
         </Button>
       </InputRightElement>
     </InputGroup>
+  )
+}
+
+function TermsCheckbox(){
+  const [isChecked , setIsChecked] = React.useState(false);
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
+  return(
+    <>
+      <Checkbox
+        isChecked = {isChecked}
+        onChange = {handleCheckboxChange}
+        colorScheme = "teal"
+        >
+          <Text>
+            I agree to the{' '}
+            <Link color = "teal.400" href = "#" target = "_blank">
+              Terms and Conditions
+              </Link>
+          </Text>
+      </Checkbox>
+    </>
   )
 }
 
@@ -61,10 +85,60 @@ const HomePage = () => {
 
           </TabList>
 
+          <TabPanels>
+            <TabPanel>
+                <Container>
+
+                      <Stack spacing = {4}>
+                        <InputGroup>
+                          {/* <InputLeftElement
+                            pointerEvents = "none"
+                          >
+                            <FaEnvelope color = "gray.100"/>
+                          </InputLeftElement> */}
+                          <Input type = "email" placeholder = "Email Address"/>
+                        </InputGroup>
+
+                        <PasswordInput placeholder = "Password"/>
+                        
+                      </Stack>
+
+                </Container>
+            </TabPanel>
+            <TabPanel>
+              <Container>
+
+                  <Stack spacing = {4}>
+                    <InputGroup>
+                      {/* <InputLeftElement
+                        pointerEvents = "none"
+                      >
+                        <FaEnvelope color = "gray.100"/>
+                      </InputLeftElement> */}
+                      <Input type = "email" placeholder = "Email Address"/>
+                    </InputGroup>
+                    <InputGroup>
+                      <Input type = "name" placeholder = "First Name"></Input>
+
+                    </InputGroup>
+                    <InputGroup>
+                      <Input type = "name" placeholder = "Last Name"></Input>
+
+                    </InputGroup>
+                    <PasswordInput placeholder = "Enter Password"/>
+                    <PasswordInput placeholder = "Confirm Password"/>
+                    
+                    <TermsCheckbox/>
+
+                  </Stack>
+
+              </Container>
+            </TabPanel>
+          </TabPanels>
 
         </Tabs>
         
-        <Container>
+        {/* <Container>
 
             <Stack spacing = {4}>
               <InputGroup>
@@ -80,7 +154,7 @@ const HomePage = () => {
               
             </Stack>
 
-        </Container>
+        </Container> */}
 
       </Box>
     </Container>
